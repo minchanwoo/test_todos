@@ -36,20 +36,19 @@ class App extends Component {
       <Router>
         <div>
           <div>
-            <Route exact path='/todos' component={()=> <TodoList lists={this.state.lists} changeDone={this.changeDone} />}/>    
+            <Route exact path='/todos' component={()=> <TodoList lists={this.state.lists} changeDone={this.changeDone} btn_value={this.state.btn_value}/>}/>    
           </div>
-          <div className='btn_all'>
-            <div className={`btn ${this.state.btn_value === 'all' ? 'selected' : ''}`} onClick={()=> this.threeBtn('all')}>
-              전체
-            </div>
-            <div className={`btn ${this.state.btn_value === 'done' ? 'selected' : ''}`} onClick={()=> this.threeBtn('done')}>
-              완료
-            </div>
-            <div className={`btn ${this.state.btn_value === 'not_done' ? 'selected' : ''}`} onClick={()=> this.threeBtn('not_done')}>
-              미완료
-            </div>
+          <div className={`btn ${this.state.btn_value === 'all' ? 'selected' : ''}`} onClick={()=> this.threeBtn('all')}>
+            전체
+          </div>
+          <div className={`btn ${this.state.btn_value === 'done' ? 'selected' : ''}`} onClick={()=> this.threeBtn('done')}>
+            완료
+          </div>
+          <div className={`btn ${this.state.btn_value === 'not_done' ? 'selected' : ''}`} onClick={()=> this.threeBtn('not_done')}>
+            미완료
           </div>
         </div>
+
       </Router>
 
     );

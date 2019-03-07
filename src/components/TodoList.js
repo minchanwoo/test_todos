@@ -27,10 +27,23 @@ class TodoList extends Component {
 
 
 	render() {
+		const filtered_list = this.props.lists.filter((item) => {
+			if(this.props.btn_value === 'done') {
+				if(item.done === false) {
+					return false;
+				}
+			}
+			if(this.props.btn_value === 'not_done') {
+				if(item.done === true) {
+					return false;
+				}
+			}
+			return true;
+		});
 		return (
 			<table>
 				<tbody>
-					{this.props.lists.map((list)=> <Todo key={list.id} id={list.id} title={list.title} done={list.done}  changeDone={this.props.changeDone} />)}				
+					{filtered_list.map((list)=> <Todo key={list.id} id={list.id} title={list.title} done={list.done}  changeDone={this.props.changeDone} />)}				
 				</tbody>
 			</table>
 		);
