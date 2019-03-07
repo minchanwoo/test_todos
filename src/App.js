@@ -7,7 +7,7 @@ import TodoDetail from './components/TodoDetail';
 
 import './App.css';
 
-const ITEMS_PER_PAGE = 5;
+export const ITEMS_PER_PAGE = 5;
 
 class App extends Component {
   constructor(props) {
@@ -76,6 +76,12 @@ class App extends Component {
       btn_value: text,
     });
   }
+
+  changePage = (newPage) => {
+    this.setState({
+      page: newPage
+    })
+  }
   
   add = () => {
     const title = window.prompt('제목을 입력해주세요');
@@ -116,10 +122,13 @@ class App extends Component {
           <div className='main_title'>Todo 리스트</div>
           <div>
             <Route exact path='/todos' 
-              component={()=> <TodoList
+              component={(props)=> <TodoList
+              {...props}
               lists={this.state.lists}
               changeDone={this.changeDone}
               btn_value={this.state.btn_value}
+              changePage={this.changePage}
+              page={this.state.page}
               />}
             />
             <Route path='/todos/:id'
@@ -132,8 +141,8 @@ class App extends Component {
             />    
           </div>
           <div style={{textAlign:'center'}}>
-            {this.getPage().map((page)=> {
-              return <div style={{display:'inline-block', marginRight:'7px', fontSize: '19px'}}>
+            {this.getPage().map((page, i)=> {
+              return <div key={i} style={{display:'inline-block', marginRight:'7px', fontSize: '19px'}}>
               {Number.isInteger
               ?
                 this.state.page === page

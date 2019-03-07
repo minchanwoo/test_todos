@@ -1,5 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
+import querystring from 'querystring';
+import { ITEMS_PER_PAGE } from '../App';
 
 import '../App.css';
 
@@ -21,7 +24,10 @@ class Todo extends Component {
 }
 
 class TodoList extends Component {
-	
+	componentWillReceiveProps(newProps) {
+		const id = Number(querystring.parse(newProps.location.search)['?page']);
+		this.props.changePage(id);
+	}
 
 	render() {
 		const filtered_list = this.props.lists.filter((item) => {
@@ -37,10 +43,11 @@ class TodoList extends Component {
 			}
 			return true;
 		});
+		const pages_list = filtered_list.slice((this.props.page -1) * ITEMS_PER_PAGE, this.props.page * ITEMS_PER_PAGE)
 		return (
 			<table>
 				<tbody>
-					{filtered_list.map((list)=> <Todo key={list.id} id={list.id} title={list.title} done={list.done}  changeDone={this.props.changeDone} />)}				
+					{pages_list.map((list)=> <Todo key={list.id} id={list.id} title={list.title} done={list.done}  changeDone={this.props.changeDone} />)}				
 				</tbody>
 			</table>
 		);
