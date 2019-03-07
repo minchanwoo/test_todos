@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import TodoList from './components/TodoList';
 import TodoDetail from './components/TodoDetail';
@@ -32,6 +32,16 @@ class App extends Component {
     });
   }
 
+  renderButton(value, label) {
+    return (
+      <Link to={`/todos?filter=${value}`}>
+        <div className={`btn ${this.state.btn_value === value ? 'selected' : ''}`} onClick={()=> this.threeBtn(value)}>
+          {label}
+        </div>
+      </Link>
+    );
+  }
+
   render() {
     return (
       <Router>
@@ -52,15 +62,9 @@ class App extends Component {
               />} 
             />    
           </div>
-          <div className={`btn ${this.state.btn_value === 'all' ? 'selected' : ''}`} onClick={()=> this.threeBtn('all')}>
-            전체
-          </div>
-          <div className={`btn ${this.state.btn_value === 'done' ? 'selected' : ''}`} onClick={()=> this.threeBtn('done')}>
-            완료
-          </div>
-          <div className={`btn ${this.state.btn_value === 'not_done' ? 'selected' : ''}`} onClick={()=> this.threeBtn('not_done')}>
-            미완료
-          </div>
+          {this.renderButton('all', '전체')}
+          {this.renderButton('done', '완료')}
+          {this.renderButton('not_done', '미완료')}
         </div>
 
       </Router>
