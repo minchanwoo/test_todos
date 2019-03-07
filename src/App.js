@@ -4,14 +4,22 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import TodoList from './components/TodoList';
 import TodoDetail from './components/TodoDetail';
 
-import list from './list';
 
 import './App.css';
 
 class App extends Component {
-  state = {
-    lists: list,
-    btn_value: 'all',
+  constructor(props) {
+    super(props);
+    let list_data = localStorage.getItem('list');
+    if(!list_data) {
+      list_data = [];
+    } else {
+      list_data = JSON.parse(list_data);
+    }
+    this.state = {
+      lists: list_data,
+      btn_value: 'all',
+    }
   }
 
   changeDone = (id) => {
@@ -23,6 +31,7 @@ class App extends Component {
       this.setState({
         lists: newList,
       });
+      localStorage.setItem('list', JSON.stringify(newList));
     })
   }
 
@@ -32,16 +41,17 @@ class App extends Component {
     });
   }
   
-  add=()=> {
+  add = () => {
     const title = window.prompt('제목을 입력해주세요');
     if(title) {
       const list = this.state.lists;
-      const last_id = this.state.lists[this.state.lists.length-1].id;
+      const last_id = list.length ? list[list.length-1].id : 0;
       list.push({title, done: false, description: '', id: last_id +1});
-    }
-    this.setState({
-      lists: list
-    });
+      this.setState({
+        lists: list,
+      });
+      localStorage.setItem('list', JSON.stringify(list));
+    }  
   }
 
   renderButton(value, label) {

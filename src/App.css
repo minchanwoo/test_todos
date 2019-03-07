@@ -47,5 +47,12 @@ table, td {
 }
 
 .addBtn {
-  margin-left:60px;
+  margin-left:310px;
+  width: 60px;
+  height: 35px;
+  border-radius: 8px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  outline: none;
 }
