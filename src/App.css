@@ -1,1 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+table, td {
+  border: 1px solid #000;
+  text-align: center;
+  border-collapse: collapse;
+  width: 700px;
+  height: 60px;
+  margin: 100px auto;
+  font-size: 20px;
+  color: #2C3A47;
+}
