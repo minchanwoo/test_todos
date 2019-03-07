@@ -22,7 +22,36 @@ class App extends Component {
       lists: list_data,
       btn_value: 'all',
       page: 1,
-      last: Math.ceil(list_data.length / ITEMS_PER_PAGE),
+      last: 1,
+      filtered_list:[],
+    }
+  }
+
+  componentDidUpdate() {
+    this.getFliteredList();
+  }
+
+  getFliteredList() {
+    const filtered_list = this.state.lists.filter((item) => {
+			if(this.state.btn_value === 'done') {
+				if(item.done === false) {
+					return false;
+				}
+			}
+			if(this.state.btn_value === 'not_done') {
+				if(item.done === true) {
+					return false;
+				}
+			}
+			return true;
+    });
+    const last=Math.ceil(filtered_list.length / ITEMS_PER_PAGE);
+    
+    if(this.state.filtered_list.length !== filtered_list.length) {
+      this.setState({
+        filtered_list,
+        last,
+      });
     }
   }
 
@@ -129,6 +158,7 @@ class App extends Component {
               btn_value={this.state.btn_value}
               changePage={this.changePage}
               page={this.state.page}
+              filtered_list={this.state.filtered_list}
               />}
             />
             <Route path='/todos/:id'

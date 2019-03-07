@@ -55,6 +55,7 @@ class TodoDetail extends Component {
 	removeBtn =() => {
 		if(window.confirm('삭제하시겠습니까?')) {
 			this.props.remove(this.state.id);
+			this.props.history.push('/todos')
 		}
 	}
 

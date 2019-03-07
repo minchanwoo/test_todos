@@ -30,20 +30,7 @@ class TodoList extends Component {
 	}
 
 	render() {
-		const filtered_list = this.props.lists.filter((item) => {
-			if(this.props.btn_value === 'done') {
-				if(item.done === false) {
-					return false;
-				}
-			}
-			if(this.props.btn_value === 'not_done') {
-				if(item.done === true) {
-					return false;
-				}
-			}
-			return true;
-		});
-		const pages_list = filtered_list.slice((this.props.page -1) * ITEMS_PER_PAGE, this.props.page * ITEMS_PER_PAGE)
+		const pages_list = this.props.filtered_list.slice((this.props.page -1) * ITEMS_PER_PAGE, this.props.page * ITEMS_PER_PAGE)
 		return (
 			<table>
 				<tbody>
