@@ -27,6 +27,10 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this.getFliteredList();
+  }
+
   componentDidUpdate() {
     this.getFliteredList();
   }
