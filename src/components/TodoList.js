@@ -16,7 +16,7 @@ class Todo extends Component {
 					상태
 				</td>
 				<td>
-					<input type='checkbox' checked={this.props.done} />
+					<input type='checkbox' checked={this.props.done} onChange={()=> this.props.changeDone(this.props.id)}/>
 				</td>
 			</tr>
 		);
@@ -24,11 +24,13 @@ class Todo extends Component {
 }
 
 class TodoList extends Component {
+
+
 	render() {
 		return (
 			<table>
 				<tbody>
-					{this.props.lists.map((list)=> <Todo title={list.title} done={list.done} />)}				
+					{this.props.lists.map((list)=> <Todo key={list.id} id={list.id} title={list.title} done={list.done}  changeDone={this.props.changeDone} />)}				
 				</tbody>
 			</table>
 		);

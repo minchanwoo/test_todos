@@ -12,11 +12,23 @@ class App extends Component {
     lists: list,
   }
 
+  changeDone = (id) => {
+    const newList = this.state.lists;
+    newList.forEach((item)=> {
+      if(item.id === id) {
+        item.done = !item.done
+      }
+      this.setState({
+        lists: newList,
+      });
+    })
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <Route exact path='/todos' component={()=> <TodoList lists={this.state.lists}/>}/>    
+          <Route exact path='/todos' component={()=> <TodoList lists={this.state.lists} changeDone={this.changeDone} />}/>    
         </div>
       </Router>
     );
