@@ -7,6 +7,8 @@ import TodoDetail from './components/TodoDetail';
 
 import './App.css';
 
+const ITEMS_PER_PAGE = 5;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +21,41 @@ class App extends Component {
     this.state = {
       lists: list_data,
       btn_value: 'all',
+      page: 1,
+      last: Math.ceil(list_data.length / ITEMS_PER_PAGE),
     }
+  }
+
+  getPage() {
+    let pages = [this.state.page];
+
+    if(1 <= this.state.page-1) {
+        pages.unshift(this.state.page-1);
+    }
+    if(this.state.page+1 <= this.state.last) {
+        pages.push(this.state.page+1);
+    }
+    if(pages.indexOf(1) < 0) {
+        pages.unshift(1);
+    }
+    if(pages.indexOf(this.state.last) < 0) {
+        pages.push(this.state.last);
+    }
+
+    let result = [];
+
+    for(var i=0; i < pages.length; i++) {
+        if(i === pages.length -1) {
+            result.push(pages[i]);
+        }else if(pages[i]+1 === pages[i+1]) {
+            result.push(pages[i]);
+        } else {
+            result.push(pages[i]);
+            result.push('...');
+        }
+    }
+
+    return result;
   }
 
   changeDone = (id) => {
@@ -74,7 +110,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.lists)
     return (
       <Router>
         <div>
@@ -95,6 +130,19 @@ class App extends Component {
               remove={this.remove}
               />} 
             />    
+          </div>
+          <div style={{textAlign:'center'}}>
+            {this.getPage().map((page)=> {
+              return <div style={{display:'inline-block', marginRight:'7px', fontSize: '19px'}}>
+              {Number.isInteger
+              ?
+                this.state.page === page
+                  ? <strong>{page}</strong>
+                  : <Link to={`/todos?page=${page}`}>{page}</Link>
+              : <span>{page}</span>
+              }
+              </div>
+            })}
           </div>
           <div>
             <button onClick={this.add} className='addBtn'>추가</button>

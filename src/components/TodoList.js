@@ -21,7 +21,7 @@ class Todo extends Component {
 }
 
 class TodoList extends Component {
-
+	
 
 	render() {
 		const filtered_list = this.props.lists.filter((item) => {
