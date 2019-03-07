@@ -78,9 +78,13 @@ class App extends Component {
     let result = [];
 
     for(var i=0; i < pages.length; i++) {
+
+      const page = pages[i];
+      const next_page = pages[i+1];
+      
         if(i === pages.length -1) {
             result.push(pages[i]);
-        }else if(pages[i]+1 === pages[i+1]) {
+        }else if(next_page - page === 1) {
             result.push(pages[i]);
         } else {
             result.push(pages[i]);
@@ -163,6 +167,8 @@ class App extends Component {
               changePage={this.changePage}
               page={this.state.page}
               filtered_list={this.state.filtered_list}
+              threeBtn={this.threeBtn}
+              filter={this.state.btn_value}
               />}
             />
             <Route path='/todos/:id'

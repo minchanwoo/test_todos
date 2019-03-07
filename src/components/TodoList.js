@@ -30,6 +30,11 @@ class TodoList extends Component {
 		if(this.props.page !== page) {
 			this.props.changePage(page);
 		}
+
+		const filter = querystring.parse(this.props.location.search)['?filter'];
+		if(this.props.filter !== filter) {
+			this.props.threeBtn(filter);
+		}
 	}
 
 	componentWillReceiveProps(newProps) {
