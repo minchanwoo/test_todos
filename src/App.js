@@ -31,6 +31,18 @@ class App extends Component {
       btn_value: text,
     });
   }
+  
+  add=()=> {
+    const title = window.prompt('제목을 입력해주세요');
+    if(title) {
+      const list = this.state.lists;
+      const last_id = this.state.lists[this.state.lists.length-1].id;
+      list.push({title, done: false, description: '', id: last_id +1});
+    }
+    this.setState({
+      lists: list
+    });
+  }
 
   renderButton(value, label) {
     return (
@@ -62,6 +74,10 @@ class App extends Component {
               />} 
             />    
           </div>
+          <div>
+            <button onClick={this.add} className='addBtn'>추가</button>
+          </div>
+
           {this.renderButton('all', '전체')}
           {this.renderButton('done', '완료')}
           {this.renderButton('not_done', '미완료')}

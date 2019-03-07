@@ -66,6 +66,7 @@ class TodoDetail extends Component {
 				<div>
 					상세: {description}
 				</div>
+				<hr/>
 				{prev_id && <Link to={`/todos/${prev_id}`}>이전으로</Link>}
 				{next_id && <Link to={`/todos/${next_id}`}>다음으로</Link>}
 			</div>
