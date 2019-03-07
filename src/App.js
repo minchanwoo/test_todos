@@ -54,6 +54,15 @@ class App extends Component {
     }  
   }
 
+  remove =(id) => {
+    console.log(id);
+    const rmTitle = this.state.lists.filter((item)=> item.id !== id);
+    this.setState({
+      lists: rmTitle
+    });
+    localStorage.setItem('list', JSON.stringify(rmTitle));
+  }
+
   renderButton(value, label) {
     return (
       <Link to={`/todos?filter=${value}`}>
@@ -65,9 +74,11 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.lists)
     return (
       <Router>
         <div>
+          투두리스트
           <div>
             <Route exact path='/todos' 
               component={()=> <TodoList
@@ -81,6 +92,7 @@ class App extends Component {
               {...props}
               lists={this.state.lists}
               changeDone={this.changeDone}
+              remove={this.remove}
               />} 
             />    
           </div>

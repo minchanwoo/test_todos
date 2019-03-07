@@ -52,6 +52,12 @@ class TodoDetail extends Component {
 		});
 	}
 
+	removeBtn =() => {
+		if(window.confirm('삭제하시겠습니까?')) {
+			this.props.remove(this.state.id);
+		}
+	}
+
 	render() {
 		const {id, title, done, description, prev_id, next_id} = this.state;
 		return (
@@ -65,6 +71,9 @@ class TodoDetail extends Component {
 				</div>
 				<div>
 					상세: {description}
+				</div>
+				<div>
+					<button onClick={this.removeBtn} className='removeBtn'>삭제</button>
 				</div>
 				<hr/>
 				{prev_id && <Link to={`/todos/${prev_id}`}>이전으로</Link>}
