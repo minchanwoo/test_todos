@@ -10,6 +10,7 @@ import './App.css';
 class App extends Component {
   state = {
     lists: list,
+    btn_value: 'all',
   }
 
   changeDone = (id) => {
@@ -24,13 +25,33 @@ class App extends Component {
     })
   }
 
+  threeBtn =(text)=> {
+    this.setState({
+      btn_value: text,
+    });
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <Route exact path='/todos' component={()=> <TodoList lists={this.state.lists} changeDone={this.changeDone} />}/>    
+          <div>
+            <Route exact path='/todos' component={()=> <TodoList lists={this.state.lists} changeDone={this.changeDone} />}/>    
+          </div>
+          <div className='btn_all'>
+            <div className={`btn ${this.state.btn_value === 'all' ? 'selected' : ''}`} onClick={()=> this.threeBtn('all')}>
+              전체
+            </div>
+            <div className={`btn ${this.state.btn_value === 'done' ? 'selected' : ''}`} onClick={()=> this.threeBtn('done')}>
+              완료
+            </div>
+            <div className={`btn ${this.state.btn_value === 'not_done' ? 'selected' : ''}`} onClick={()=> this.threeBtn('not_done')}>
+              미완료
+            </div>
+          </div>
         </div>
       </Router>
+
     );
   }
 }
