@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../App.css';
@@ -7,16 +7,10 @@ class Todo extends Component {
 	render() {
 		return (
 			<tr>
-				<td>
-					제목
-				</td>
 				<td style={{color:'#F97F51'}}>
 					<Link to={`/todos/${this.props.id}`}>
 						{this.props.title}
 					</Link>
-				</td>
-				<td>
-					상태
 				</td>
 				<td>
 					<input type='checkbox' checked={this.props.done} onChange={()=> this.props.changeDone(this.props.id)}/>

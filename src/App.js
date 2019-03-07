@@ -78,7 +78,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          투두리스트
+          <div className='main_title'>Todo 리스트</div>
           <div>
             <Route exact path='/todos' 
               component={()=> <TodoList

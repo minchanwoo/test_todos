@@ -13,7 +13,7 @@ table, td {
   border-collapse: collapse;
   width: 700px;
   height: 60px;
-  margin: 100px auto;
+  margin: 30px auto;
   font-size: 20px;
   color: #2C3A47;
 }
@@ -66,4 +66,12 @@ table, td {
   color: #fff;
   border: none;
   outline: none;
+}
+.main_title {
+  font-size: 35px;
+  text-align: center;
+  margin-top: 15px;
+}
+.list_title {
+  background-color: #f6e58d;
 }
