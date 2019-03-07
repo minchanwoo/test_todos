@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import TodoList from './components/TodoList';
+import TodoDetail from './components/TodoDetail';
 
 import list from './list';
 
@@ -36,7 +37,20 @@ class App extends Component {
       <Router>
         <div>
           <div>
-            <Route exact path='/todos' component={()=> <TodoList lists={this.state.lists} changeDone={this.changeDone} btn_value={this.state.btn_value}/>}/>    
+            <Route exact path='/todos' 
+              component={()=> <TodoList
+              lists={this.state.lists}
+              changeDone={this.changeDone}
+              btn_value={this.state.btn_value}
+              />}
+            />
+            <Route path='/todos/:id'
+              component={(props)=> <TodoDetail
+              {...props}
+              lists={this.state.lists}
+              changeDone={this.changeDone}
+              />} 
+            />    
           </div>
           <div className={`btn ${this.state.btn_value === 'all' ? 'selected' : ''}`} onClick={()=> this.threeBtn('all')}>
             전체

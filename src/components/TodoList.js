@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import '../App.css';
 
@@ -10,7 +11,9 @@ class Todo extends Component {
 					제목
 				</td>
 				<td style={{color:'#F97F51'}}>
-					{this.props.title}
+					<Link to={`/todos/${this.props.id}`}>
+						{this.props.title}
+					</Link>
 				</td>
 				<td>
 					상태

@@ -38,3 +38,9 @@ table, td {
   background-color: #fdcb6e;
   color: #ff4d4d;
 }
+
+.desc {
+  font-size: 23px;
+  color: #636e72;
+  margin: 70px 0 70px 100px;
+}
