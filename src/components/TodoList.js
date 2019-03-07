@@ -25,7 +25,6 @@ class Todo extends Component {
 
 class TodoList extends Component {
 	componentWillMount() {
-		console.log('HAHA')
 		const page = Number(querystring.parse(this.props.location.search)['?page'] || 1);
 		if(this.props.page !== page) {
 			this.props.changePage(page);
